@@ -1,0 +1,268 @@
+div.main{
+    background: rgba(255, 255, 255, 0.562);
+    width: 27%;
+    height: 98%;
+    position: relative;
+    border-radius: 10px;
+    margin-top: 1%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0px 2px 6px 2px #afafaf;
+    overflow: hidden;
+
+}
+
+
+div.main-2{
+    background: rgba(255, 255, 255, 0.562);
+    width: 27%;
+    height: 98%;
+    position: relative;
+    border-radius: 10px;
+    margin-top: 1%;
+    display:none;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0px 2px 6px 2px #afafaf;
+}
+::-webkit-scrollbar{
+    display: none;
+}
+::-moz-range-thumb{
+    display: none;
+}
+
+
+img.main{
+    width: 100%;
+    height:100%;
+    overflow: none;
+    opacity: 0.2;
+    background-color: black;
+    position: absolute;
+    background-image: url(./train.jpg);
+}
+
+
+
+div.simulate{
+    border-radius: 10px;
+    margin-left: auto;
+    max-height: 75%;
+    padding :  10px;
+    margin-right: auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+div.header-container-2{
+    background-color: rgb(114, 114, 216);
+    border-radius : 10px 10px 0px 0px;
+    height: 25px;
+    min-width: 27%;
+
+    position: relative;
+    color: white;
+    margin-bottom: 10px;
+    text-align: center;
+    padding: 25px 0;
+}
+
+div.pauseplay{
+    position: absolute;
+    margin-left: 67%;
+    display: flex;
+    margin-top: 15%;
+    display: none;
+    top: 0;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+button.pausePlay{
+    height: 50px;
+    width: 50px;
+    background-color: rgb(114, 114, 216);
+    border-color: transparent;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    color: white;
+    box-shadow: 0px 2px 3px 1px #afafaf;
+}
+
+button.pausePlay:hover{
+    height: 50px;
+    width: 50px;
+    background-color: rgb(163, 163, 219);
+    border-color: transparent;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    color: white;
+    box-shadow: 0px 2px 3px 1px #afafaf;
+}
+
+button.pausePlay:active{
+    height: 50px;
+    width: 50px;
+    background-color: rgb(90, 90, 221);
+    border-color: transparent;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    color: white;
+    box-shadow: 0px 2px 3px 1px #afafaf;
+}
+
+div.header-container{
+    background-color: rgb(114, 114, 216);
+    border-radius : 10px 10px 0px 0px;
+    height: 25px;
+    color: white;
+    text-align: center;
+    padding: 25px 0;
+}
+
+input.main{
+        margin: 20px;
+        border-color: rgb(114, 114, 216);
+        background-color: transparent;
+        width: 20px;
+        color: rgb(114, 114, 216);
+        border-width: 0 0 1 0;
+        padding: 0 0 1 0;
+}
+div.flex{
+    display: flex;
+    color: #9b9b9b;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.body-flex{
+    display: flex;
+    color: #9b9b9b;
+    justify-content: space-between;
+}
+
+div.margin{
+    margin-top: 10px;
+}
+
+div.line{
+    height: 1px;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: rgb(143, 142, 142);
+}
+span.main{
+    margin-left: 20px;
+}
+
+button.simulate{
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    background-color: rgb(114, 114, 216);
+    border-color: transparent;
+    border-radius: 50px;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    color: white;
+    box-shadow: 0px 2px 3px 1px #afafaf;
+}
+
+button.simulate:hover{
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    background-color: rgb(163, 163, 219);
+    border-color: transparent;
+    border-radius: 50px;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    color: white;
+    box-shadow: 0px 2px 3px 1px #afafaf;
+}
+
+button.simulate:active{
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    background-color: rgb(90, 90, 221);
+    border-color: transparent;
+    border-radius: 50px;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    color: white;
+    box-shadow: 0px 2px 3px 1px #afafaf;
+}
+
+div.simulation{
+    position: absolute;
+    left: 63%;
+    height: 98%;
+    bottom:0;
+    padding-left: 30px;
+    padding-right: 30px;
+    overflow-y: auto;
+}
+
+div.self{
+        padding: 10px;
+        margin-left: auto;
+        background-color: rgb(114, 114, 216);
+        border-radius: 10px;
+        color: white;
+		max-width: 60%;
+        word-wrap: break-word;
+}
+div.selfNormal{
+        margin-top: 5px;
+        padding: 10px;
+        margin-left: auto;
+        background-color: rgb(114, 114, 216);
+        border-radius: 10px;
+        color: white;
+		max-width: 60%;
+        word-wrap: break-word;
+}
+
+div.passenger{
+        padding: 10px;
+        margin-right: auto;
+        background-color: rgb(114, 114, 216);
+        border-radius: 10px;
+        color: white;
+		max-width: 60%;
+        word-wrap: break-word;
+}
+
+
+
+span.passenger{
+  margin-top: 40px;
+  color: gray;
+  padding: 10px;
+  text-align: left;
+  margin-left: 10px;
+}
+
+span.self{
+	color: gray;
+	margin-top: 40px;
+    text-align: right;
+    padding: 10px;
+    margin-left: 87%;
+	margin-right: 20px;
+}

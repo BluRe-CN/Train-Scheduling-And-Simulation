@@ -1,0 +1,222 @@
+<DOCTYPE html>
+    <html>
+
+    <head>
+        <title>
+            Simulator
+        </title>
+        <link rel="stylesheet" type="text/css" href="./style.css">
+        </style>
+        <script type="text/javascript" src="Passenger.js">
+        </script>
+        <script type="text/javascript" src="Attendant.js">
+        </script>
+        <script type="text/javascript" src="PriorityQueue.js">
+        </script>
+        <script type="text/javascript" src="Queue.js">
+        </script>
+        <script type="text/javascript" src="Train.js">
+        </script>
+
+        <script type="text/javascript" src="ServiceEndEvent.js">
+        </script>
+        <script type="text/javascript" src="PassengerServiceEvent.js">
+        </script>
+        <script type="text/javascript" src="PassengerArrivalEvent.js">
+        </script>
+        <script type="text/javascript" src="TrainStation.js">
+        </script>
+        <script type="text/javascript" src="Response.js">
+        </script>
+        <script type="text/javascript" src="InputValidator.js">
+        </script>
+    </head>
+
+    <body>
+        <script>
+
+            var holder, messageHolder, numberOfTrains, numberOfAttendants, numberOfPassengers, speedElement, options;
+
+            function populate(responses, speed, i) {
+                this.responses = responses;
+                var length = responses.length;
+                var elem = document.getElementById("simulationMessage");
+
+                var interval = setInterval(() => {
+                    this.isSimulating = true;
+
+                    var response = responses[i];
+                    var cl = "self";
+                    if (response.isPassenger) {
+                        cl = "passenger";
+                    }
+
+                    var time = response.getTime();
+                    var include = `<div><span class=${cl}>${time}</span>`;
+
+                    if (time == "null") {
+                        include = "";
+                        cl = "selfNormal";
+                    }
+                    prev = time;
+                    elem.innerHTML += `${include}</div><div class=${cl} id=${i}>${response.getMessage()}</div>`;
+                    var cElement = document.getElementById(`${i}`);
+                    cElement.scrollIntoView(true);
+                    this.index = ++i;
+                    if (i == length || this.stopSimulation) {
+
+
+                        if (this.finalStop) {
+                            endSimulation();
+                        }
+
+                        this.isSimulating = false;
+                        clearInterval(interval);
+                        this.trainStation.resetSimulator();
+
+                    }
+                }, speed);
+
+            }
+
+            function endSimulation() {
+                this.index = 0;
+                this.messageHolder.style.display = "none";
+                this.options.style.display = "none";
+                this.holder.style.display = "block";
+                this.header.textContent = "Simulating..."
+                this.elem.innerHTML = "";
+            }
+
+            function simulate() {
+                try {
+                    this.stopSimulation = false;
+                    this.finalStop = false;
+                    this.header = document.getElementById("headerMessage");
+                    this.holder = document.getElementById("main");
+                    this.elem = elem = document.getElementById("simulationMessage");
+                    this.messageHolder = document.getElementById("messageHolder");
+                    this.numberOfTrains = document.getElementById("numberOfTrains");
+                    this.numberOfAttendants = document.getElementById("numberOfAttendants");
+                    this.numberOfPassengers = document.getElementById("numberOfPassengers");
+                    this.speedElement = document.getElementById("simulationSpeed");
+                    this.options = document.getElementById("options");
+                    this.speed = parseFloat(speedElement.value);
+                    var avgPassengerArrivalTime = document.getElementById("avgPassengerArrivalTime");
+                    var avgPassengerSchedulingTime = document.getElementById("avgPassengerSchedulingTime");
+
+
+                    var elementArray = [this.numberOfTrains, this.numberOfAttendants, this.numberOfPassengers, this.avgPassengerArrivalTime, this.avgPassengerSchedulingTime, this.speedElement];
+                    var numOfValidations = 6;
+                    var validator = new InputValidator(elementArray,
+                        (element, value) => {
+                            --numOfValidations;
+                            element.style.borderColor = "rgb(114, 114, 216)";
+                        }, (element, value) => {
+                            element.style.borderColor = "red";
+                        });
+
+                    validator.validate();
+
+                    if (numOfValidations == 0) {
+                        this.options.style.display = "flex";
+                        this.holder.style.display = "none";
+                        this.messageHolder.style.display = "block";
+
+                        this.trainStation = new TrainStation((responses) => {
+                            populate(responses, this.speed, Number(0));
+                        });
+                        this.trainStation.setNumberOfAttendants(parseFloat(numberOfAttendants.value));
+                        this.trainStation.setNumberOfPassengers(parseFloat(numberOfPassengers.value));
+                        this.trainStation.setNumberOfTrains(parseFloat(numberOfTrains.value));
+                        this.trainStation.setAveragePassengerArrivalTime(parseFloat(avgPassengerArrivalTime.value));
+                        this.trainStation.setAveragePassengerSchedulingDuration(parseFloat(avgPassengerSchedulingTime.value));
+                        this.trainStation.startSimulation();
+                    } else {
+                        alert("There are " + numOfValidations + " wrong inputs, please check and try again.");
+                    }
+                } catch (e) {
+                    alert(e.stack);
+                }
+
+            }
+
+            function stop() {
+                if (this.isSimulating) {
+                    this.finalStop = true;
+                    this.stopSimulation = true;
+                } else {
+                    endSimulation();
+                }
+
+            }
+
+            function pausePlay() {
+                var elem = document.getElementById("pause");
+                if (!this.pauseSimulation) {
+                    this.pauseSimulation = true;
+                    this.stopSimulation = true;
+                    elem.textContent = "Play";
+                    this.header.textContent = "Simulation paused..."
+                } else {
+                    elem.textContent = "Pause";
+                    this.pauseSimulation = false;
+                    this.stopSimulation = false;
+                    this.header.textContent = "Simulating..."
+                    populate(this.responses, this.speed, this.index);
+                }
+            }
+        </script>
+        <img class="main"></img>
+        <div class="menu">
+        </div>
+
+        <div class="main-2" id="messageHolder">
+            <div class="header-container-2" id="headerMessage">
+                Simulating...
+            </div>
+            <div class="simulate" id="simulationMessage">
+            </div>
+        </div>
+
+        <div class="main" id="main">
+            <div class="header-container">
+                Simulator settings
+            </div>
+            <div class="margin"></div>
+
+            <div class="flex">
+                <span class="main">Number of trains.</span>
+                <input class="main" id="numberOfTrains"></input>
+
+            </div>
+            <div class="flex">
+                <span class="main">Number of attendants.</span>
+                <input class="main" id="numberOfAttendants"></input>
+            </div>
+            <div class="flex">
+                <span class="main">Number of passengers.</span>
+                <input class="main" id="numberOfPassengers"></input>
+            </div>
+            <div class="flex">
+                <span class="main">Average passenger arrival time.</span>
+                <input class="main" id="avgPassengerArrivalTime"></input>
+            </div>
+            <div class="flex">
+                <span class="main">Average passenger scheduling time.</span>
+                <input class="main" id="avgPassengerSchedulingTime"></input>
+            </div>
+            <div class="flex">
+                <span class="main">Simulation speed</span>
+                <input class="main" id="simulationSpeed"></input>
+            </div>
+            <button class="simulate" onclick="simulate()">Start</button>
+
+        </div>
+        <div class="pauseplay" id="options">
+            <button class="pausePlay" onclick="pausePlay()" id="pause">Pause</button>
+            <button class="pausePlay" onclick="stop()">Stop</button>
+        </div>
+    </body>
+
+    </html>
